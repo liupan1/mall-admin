@@ -4,7 +4,7 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Home from '../views/Layout/Home.vue';
 import Login from '../views/Layout/Login.vue';
-
+import Logon from "../views/Layout/Logon.vue";
 Vue.use(VueRouter);
 const asyncRouterMap = [{
     path: '/product',
@@ -79,12 +79,23 @@ const routes = [{
                 import ('../views/page/index.vue'),
         }],
     },
+
     {
         path: '/login',
         name: 'Login',
         component: Login,
         meta: {
             title: '登录',
+            hidden: true,
+        },
+    },
+
+    {
+        path: '/logon',
+        name: 'Logon',
+        component: Logon,
+        meta: {
+            title: '注册',
             hidden: true,
         },
     },
@@ -96,8 +107,11 @@ const router = new VueRouter({
 });
 let isAddRoutes = false;
 router.beforeEach((to, from, next) => {
+    if (to.path == '/logon') {
+        return next()
+    }
     if (to.path !== '/login') {
-        if (store.state.user.appkey && store.state.user.username && store.state.user.role) {
+        if (store.state.user.appkey && store.state.user.username) {
             if (!isAddRoutes) {
                 const menuRoutes = getMenuRoutes(store.state.user.role, asyncRouterMap);
 

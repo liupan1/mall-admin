@@ -6,7 +6,7 @@
     </div>
   </a-table>
 </template>
-</template>
+
 <script>
 const columns = [
   {

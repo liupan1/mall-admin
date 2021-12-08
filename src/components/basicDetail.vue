@@ -42,6 +42,7 @@ export default {
   props: ['form'],
 
   created() {
+    console.log(this.$store.state.user);
     list().then((res) => {
       this.categoryList = res.data;
     });

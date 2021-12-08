@@ -27,6 +27,7 @@ export default {
     };
   },
   props: ['data'],
+  
   methods: {
     handleSubmit(e) {
       this.$emit('submit', this.searchFrom);

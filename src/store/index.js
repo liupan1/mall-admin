@@ -34,6 +34,9 @@ export default new Vuex.Store({
             commit('changeCollapsed');
         },
         setUserInfo({ commit }, userInfo) {
+            if (userInfo.role == "") {
+                userInfo.role = "admin"
+            }
             commit('setUserInfo', userInfo);
             setCookie(userInfo);
         },

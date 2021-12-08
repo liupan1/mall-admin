@@ -11,7 +11,7 @@
 
       <a-form-model-item :wrapper-col="{ span: 18, offset: 4 }">
         <a-button type="primary" @click="submitForm('loginForm')">登录</a-button>
-        <a-button style="margin-left: 10px">注册</a-button>
+        <a-button style="margin-left: 10px" @click="register">注册</a-button>
       </a-form-model-item>
     </a-form-model>
   </div>
@@ -60,6 +60,7 @@ export default {
           login(this.loginForm)
             .then((res) => {
               this.$store.dispatch('setUserInfo', res);
+            
               this.$router.push({ name: 'Home' });
             })
             .catch((err) => {
@@ -69,6 +70,9 @@ export default {
         }
         return false;
       });
+    },
+    register() {
+      this.$router.push({ name: 'Logon' });
     },
   },
 };
