@@ -9,15 +9,15 @@
         <a-input v-model="loginForm.password" type="password" autocomplete="off" />
       </a-form-model-item>
 
-      <a-form-model-item :wrapper-col="{ span: 14, offset: 4 }">
+      <a-form-model-item :wrapper-col="{ span: 18, offset: 4 }">
         <a-button type="primary" @click="submitForm('loginForm')">登录</a-button>
-        <a-button style="margin-left: 10px" @click="resetForm('loginForm')">注册</a-button>
+        <a-button style="margin-left: 10px">注册</a-button>
       </a-form-model-item>
     </a-form-model>
   </div>
 </template>
 <script>
-import { login } from '@/api/user.js';
+import { login } from '@/api/user';
 
 export default {
   data() {
@@ -57,23 +57,18 @@ export default {
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          alert('提交!');
           login(this.loginForm)
             .then((res) => {
-              console.log(res);
+              this.$store.dispatch('setUserInfo', res);
               this.$router.push({ name: 'Home' });
             })
             .catch((err) => {
-              this.$message.error(error);
+              this.$message.error(err);
             });
-        } else {
-          console.log('错误提交!!');
-          return false;
+          return true;
         }
+        return false;
       });
-    },
-    resetForm(formName) {
-      this.$refs[formName].resetFields();
     },
   },
 };
@@ -81,8 +76,11 @@ export default {
 <style lang="less" >
 .login {
   .login-form {
-    max-width: 500px;
-    margin: 100px auto;
+    position: absolute;
+    max-width: 600px;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 100px;
     border: 1px solid #eee;
     padding: 30px 10px 6px 60px;
   }

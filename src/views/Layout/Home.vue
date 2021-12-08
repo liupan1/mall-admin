@@ -1,11 +1,10 @@
 <template>
   <div class="home-container">
-    <Menu />
+    <Menu :key="key" />
     <div :class="{'main-app': true, 'menu-unfold':$store.state.collapsed}">
       <SliderNav />
       <router-view></router-view>
     </div>
-
   </div>
 </template>
 
@@ -17,6 +16,16 @@ export default {
   components: {
     Menu,
     SliderNav,
+  },
+  data() {
+    return {
+      key: Date.now(),
+    };
+  },
+  watch: {
+    $route() {
+      this.key = Date.now();
+    },
   },
 };
 </script>

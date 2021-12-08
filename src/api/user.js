@@ -1,5 +1,3 @@
-import axios from "../axios"
+import axios from '../axios';
 
-export const login = (params) => {
-    return axios.post('/passport/login', params)
-}
+export const login = (params) => axios.post('/passport/login', params);
